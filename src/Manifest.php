@@ -226,7 +226,9 @@ class Manifest
                 $type = $preload['type'];
                 $as = $preload['as'];
 
-                $tags[] = "<link rel=\"preload\" as=\"{$as}\" type=\"{$type}\" href=\"{$this->base_path}{$chunk->file}\" />";
+                $crossorigin = ($as === 'font' || $as === 'fetch') ? "crossorigin" : "";
+
+                $tags[] = "<link rel=\"preload\" as=\"{$as}\" type=\"{$type}\" href=\"{$this->base_path}{$chunk->file}\" $crossorigin/>";
             }
 
             foreach ($chunk->assets as $asset) {
@@ -237,7 +239,9 @@ class Manifest
                     $type = $preload['type'];
                     $as = $preload['as'];
 
-                    $tags[] = "<link rel=\"preload\" as=\"{$as}\" type=\"{$type}\" href=\"{$this->base_path}{$asset}\" />";
+                    $crossorigin = ($as === 'font' || $as === 'fetch') ? "crossorigin" : "";
+
+                    $tags[] = "<link rel=\"preload\" as=\"{$as}\" type=\"{$type}\" href=\"{$this->base_path}{$asset}\" $crossorigin/>";
                 }
             }
         }
